@@ -54,12 +54,51 @@ struct ContentView: View {
 
 struct FeedView: View {
     @Binding var showSidebar: Bool
+    @State private var posts: [Post] = [
+        Post(
+            authorName: "John Doe",
+            authorTitle: "Software Engineer at Apple",
+            authorImage: "person.circle.fill",
+            content: "Excited to announce that I've joined Apple as a Software Engineer! Looking forward to working with an amazing team and contributing to innovative projects.",
+            timeAgo: "2h",
+            likes: 245,
+            comments: 32,
+            shares: 12
+        ),
+        Post(
+            authorName: "Jane Smith",
+            authorTitle: "Product Manager at Google",
+            authorImage: "person.circle.fill",
+            content: "Just launched our new AI-powered feature! It's been an incredible journey working with our talented team to bring this to life. #AI #Innovation",
+            timeAgo: "4h",
+            likes: 189,
+            comments: 45,
+            shares: 23
+        ),
+        Post(
+            authorName: "Mike Johnson",
+            authorTitle: "Senior Developer at Microsoft",
+            authorImage: "person.circle.fill",
+            content: "Sharing some insights from our latest project: Building scalable microservices architecture. Check out the key learnings and best practices we discovered!",
+            timeAgo: "6h",
+            likes: 156,
+            comments: 28,
+            shares: 15
+        )
+    ]
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HeaderView(showSidebar: $showSidebar)
-            Spacer()
-            Text("Feed Content")
-            Spacer()
+            
+            ScrollView {
+                VStack(spacing: 16) {
+                    ForEach(posts) { post in
+                        FeedPostView(post: post)
+                    }
+                }
+                .padding()
+            }
         }
     }
 }
@@ -91,12 +130,7 @@ struct JobsView: View {
 struct NotificationsView: View {
     @Binding var showSidebar: Bool
     var body: some View {
-        VStack {
-            HeaderView(showSidebar: $showSidebar)
-            Spacer()
-            Text("Notifications Content")
-            Spacer()
-        }
+        NotificationView()
     }
 }
 
