@@ -130,7 +130,7 @@ struct JobsView: View {
 struct NotificationsView: View {
     @Binding var showSidebar: Bool
     var body: some View {
-        NotificationView()
+        NotificationView(showSidebar: $showSidebar)
     }
 }
 

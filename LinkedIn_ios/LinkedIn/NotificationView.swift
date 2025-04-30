@@ -20,6 +20,7 @@ struct Notification: Identifiable {
 }
 
 struct NotificationView: View {
+    @Binding var showSidebar: Bool
     @State private var notifications: [Notification] = [
         Notification(
             type: .connectionRequest,
@@ -115,7 +116,7 @@ struct NotificationView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HeaderView(showSidebar: .constant(false))
+            HeaderView(showSidebar: $showSidebar)
             
             ScrollView {
                 VStack(spacing: 12) {
@@ -200,5 +201,5 @@ struct NotificationCard: View {
 }
 
 #Preview {
-    NotificationView()
+    NotificationView(showSidebar: .constant(false))
 } 
